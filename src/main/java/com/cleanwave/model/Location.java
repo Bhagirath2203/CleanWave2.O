@@ -1,4 +1,4 @@
-package src.main.java.com.cleanwave.model;
+package com.cleanwave.model;
 
 import lombok.Data;
 

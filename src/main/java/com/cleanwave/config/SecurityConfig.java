@@ -1,4 +1,4 @@
-package src.main.java.com.cleanwave.config;
+package com.cleanwave.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import src.main.java.com.cleanwave.security.JwtRequestFilter;
+import com.cleanwave.security.JwtRequestFilter;
+import com.cleanwave.security.Roles;
 
 import java.util.Arrays;
 import java.util.List;

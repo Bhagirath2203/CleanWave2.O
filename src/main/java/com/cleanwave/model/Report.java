@@ -1,4 +1,4 @@
-package src.main.java.com.cleanwave.model;
+package com.cleanwave.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,40 +8,35 @@ import java.time.LocalDateTime;
 @Data
 @Document(collection = "reports")
 public class Report {
+
     @Id
     private String id;
-    
-    private LocalDateTime createdAt = LocalDateTime.now();
-    
-    private String category;
-    
-    private String description;
-    
-    private Location location;
-    
-    private String imageDataUrl;
-    
-    private String by; // Reporter username.email
-    
-    private ReportStatus status = ReportStatus.OPEN;
-    
-    private LocalDateTime resolvedAt;
-    
-    private AssignedWorker assignedTo;
-    
+
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
+    private LocalDateTime resolvedAt;
+
+    private String category;
+    private String description;
+    private Location location;
+    private String imageDataUrl;
+
+    private String createdBy;   // reporter email
+    private AssignedWorker assignedTo;
+
+    private ReportStatus status;
+
     public enum ReportStatus {
         OPEN("Open"),
         IN_PROGRESS("In Progress"),
         CLOSED("Closed");
-        
-        private String displayName;
-        
+
+        private final String displayName;
+
         ReportStatus(String displayName) {
             this.displayName = displayName;
         }
-        
+
         public String getDisplayName() {
             return displayName;
         }

@@ -1,4 +1,4 @@
-package src.main.java.com.cleanwave.security;
+package com.cleanwave.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package src.main.java.com.cleanwave.security;
+package com.cleanwave.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import src.main.java.com.cleanwave.model.User;
-import src.main.java.com.cleanwave.repository.UserRepository;
+import com.cleanwave.model.User;
+import com.cleanwave.repository.UserRepository;
 
 import java.util.Collections;
 
@@ -22,6 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        
+        if (user.getRole() == null) {
+            throw new UsernameNotFoundException("User role not set: " + email);
+        }
         
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
