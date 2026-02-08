@@ -1,13 +1,11 @@
 package com.cleanwave.controller;
 
-import com.cleanwave.dto.AuthResponse;
-import com.cleanwave.dto.LoginRequest;
-import com.cleanwave.dto.SignupRequest;
-import com.cleanwave.exception.BadRequestException;
+import com.cleanwave.dto.*;
+import com.cleanwave.security.JwtUtil;
 import com.cleanwave.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +24,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         userService.signup(request);
-        return ResponseEntity.ok(Map.of("message", "User registered"));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")

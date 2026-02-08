@@ -10,6 +10,7 @@ import com.cleanwave.model.AssignedWorker;
 import com.cleanwave.model.Report;
 import com.cleanwave.model.User;
 import com.cleanwave.repository.ReportRepository;
+import com.cleanwave.security.Roles;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,9 +36,7 @@ public class ReportService {
         report.setLocation(request.getLocation());
         report.setImageDataUrl(request.getImageDataUrl());
 
-        // ✅ FIX
         report.setCreatedBy(user.getEmail());
-
         report.setStatus(Report.ReportStatus.OPEN);
         report.setCreatedAt(LocalDateTime.now());
         report.setUpdatedAt(LocalDateTime.now());
@@ -73,7 +72,8 @@ public class ReportService {
         Report report = getReportById(reportId);
         User worker = userService.getUserById(workerId);
 
-        if (worker.getRole() != User.UserRole.WORKER) {
+        // ✅ FIXED ROLE CHECK
+        if (worker.getRole() != Roles.WORKER) {
             throw new BadRequestException("User is not a worker");
         }
 
@@ -87,7 +87,6 @@ public class ReportService {
 
         report = reportRepository.save(report);
 
-        // ✅ FIX
         emailService.sendComplaintAssignedEmail(
                 report.getCreatedBy(),
                 reportId,
@@ -124,7 +123,6 @@ public class ReportService {
 
         report = reportRepository.save(report);
 
-        // ✅ FIX
         emailService.sendComplaintStatusUpdateEmail(
                 report.getCreatedBy(),
                 reportId,

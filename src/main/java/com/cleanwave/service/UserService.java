@@ -1,18 +1,13 @@
 package com.cleanwave.service;
 
-import com.cleanwave.dto.AuthResponse;
-import com.cleanwave.dto.LoginRequest;
 import com.cleanwave.dto.SignupRequest;
 import com.cleanwave.exception.BadRequestException;
-import com.cleanwave.exception.UnauthorizedException;
 import com.cleanwave.model.User;
 import com.cleanwave.repository.UserRepository;
-import com.cleanwave.security.JwtUtil;
+import com.cleanwave.security.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {
